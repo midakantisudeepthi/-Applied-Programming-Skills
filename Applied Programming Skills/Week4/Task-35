@@ -1,0 +1,28 @@
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+        
+        int[] freq = new int[26];
+        int maxFreq = 0;
+        
+        // Count frequencies
+        for (char task : tasks) {
+            freq[task - 'A']++;
+            maxFreq = Math.max(maxFreq, freq[task - 'A']);
+        }
+        
+        int maxCount = 0;
+        
+        // Count how many tasks have max frequency
+        for (int f : freq) {
+            if (f == maxFreq) {
+                maxCount++;
+            }
+        }
+        
+        int partCount = maxFreq - 1;
+        int partLength = n + 1;
+        int minTime = partCount * partLength + maxCount;
+        
+        return Math.max(tasks.length, minTime);
+    }
+}
